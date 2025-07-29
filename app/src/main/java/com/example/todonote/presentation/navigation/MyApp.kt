@@ -32,7 +32,7 @@ fun MyApp() {
     ) {
         composable(Routes.SPLASH) { SplashScreen(navController) }
         composable(Routes.HOME) { HomeScreen(viewModel) }
-        composable(Routes.HOMECONTACT) { HomeContact() }
+        composable(Routes.HOMECONTACT) { HomeContact(viewModel) }
         composable(Routes.ADD) {
             AddScreen(viewModel)
         }

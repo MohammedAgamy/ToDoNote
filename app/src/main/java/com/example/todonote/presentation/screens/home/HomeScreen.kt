@@ -41,7 +41,7 @@ fun HomeScreen(viewModel: NoteViewModel) {
     ) { innerPadding ->
         Box(modifier = Modifier.padding(innerPadding)) {
             when (selectedTab) {
-                Routes.HOMECONTACT -> HomeContact()
+                Routes.HOMECONTACT -> HomeContact(viewModel)
                 Routes.ADD -> AddScreen(viewModel)
                 Routes.SEARCH -> SearchScreen()
                 Routes.TRASH -> TrashScreen()
