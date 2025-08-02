@@ -12,25 +12,46 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import coil.compose.rememberAsyncImagePainter
 import com.example.todonote.data.local.NoteEntity
-import com.example.todonote.presentation.screens.NoteViewModel
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
+
 
 @Composable
-fun NoteItem(notes: NoteEntity){
+fun NoteItem(notes: NoteEntity) {
+
+
+    val customColors = listOf(
+        Color(0xFFEF5350), // Red
+        Color(0xFFAB47BC), // Purple
+        Color(0xFF5C6BC0), // Indigo
+        Color(0xFF26A69A), // Teal
+        Color(0xFFFFCA28), // Amber
+        Color(0xFFFF7043), // Deep Orange
+        Color(0xFF8D6E63), // Brown
+    )
+
+    fun getRandomColor(): Color {
+        return customColors.random()
+    }
+
+    val backGroundColor = remember { getRandomColor() }
 
     Card(
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp)
+            .padding(4.dp)
             .shadow(4.dp, shape = RoundedCornerShape(16.dp)),
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFFF5F5F5))
+        colors = CardDefaults.cardColors(containerColor = backGroundColor)
     ) {
 
         Column(modifier = Modifier.padding(16.dp)) {
@@ -45,18 +66,17 @@ fun NoteItem(notes: NoteEntity){
                 style = MaterialTheme.typography.bodyMedium,
                 color = Color.DarkGray
             )
-            Spacer(modifier = Modifier.height(4.dp))
-           /* Text(
-                text = SimpleDateFormat("dd MMM yyyy - hh:mm a", Locale.getDefault())
-                    .format(Date(notes.time)),
+            Spacer(modifier = Modifier.height(6.dp))
+            Text(
+                text = notes.time,
                 style = MaterialTheme.typography.labelSmall,
                 color = Color.Gray
-            )*/
+            )
 
-            /*if (notes.image.isNotEmpty()) {
+            if (notes.image.isNotEmpty()) {
                 Spacer(modifier = Modifier.height(8.dp))
                 Image(
-                    painter = rememberAsyncImagePainter(note.image),
+                    painter = rememberAsyncImagePainter(notes.image),
                     contentDescription = "Note Image",
                     modifier = Modifier
                         .fillMaxWidth()
@@ -64,9 +84,10 @@ fun NoteItem(notes: NoteEntity){
                         .clip(RoundedCornerShape(12.dp)),
                     contentScale = ContentScale.Crop
                 )
-            }*/
+            }
 
         }
     }
+
 
 }

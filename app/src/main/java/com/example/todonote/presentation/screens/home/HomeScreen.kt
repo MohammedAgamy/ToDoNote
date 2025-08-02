@@ -1,5 +1,7 @@
 package com.example.todonote.presentation.screens.home
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
@@ -13,14 +15,17 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.todonote.presentation.screens.NoteViewModel
 import com.example.todonote.presentation.screens.Routes
 import com.example.todonote.presentation.screens.add.AddScreen
 import com.example.todonote.presentation.screens.search.SearchScreen
 import com.example.todonote.presentation.screens.trash.TrashScreen
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun HomeScreen(viewModel: NoteViewModel) {
+fun HomeScreen(viewModel: NoteViewModel , navHostController: NavHostController) {
     var selectedTab by remember { mutableStateOf(Routes.HOMECONTACT) }
 
     Scaffold(
@@ -42,7 +47,7 @@ fun HomeScreen(viewModel: NoteViewModel) {
         Box(modifier = Modifier.padding(innerPadding)) {
             when (selectedTab) {
                 Routes.HOMECONTACT -> HomeContact(viewModel)
-                Routes.ADD -> AddScreen(viewModel)
+                Routes.ADD -> AddScreen(viewModel , navController = navHostController ) // Replace with actual NavHostController
                 Routes.SEARCH -> SearchScreen()
                 Routes.TRASH -> TrashScreen()
             }

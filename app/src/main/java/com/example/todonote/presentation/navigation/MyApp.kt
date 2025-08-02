@@ -31,11 +31,9 @@ fun MyApp() {
         startDestination = Routes.SPLASH
     ) {
         composable(Routes.SPLASH) { SplashScreen(navController) }
-        composable(Routes.HOME) { HomeScreen(viewModel) }
+        composable(Routes.HOME) { HomeScreen(viewModel , navController) }
         composable(Routes.HOMECONTACT) { HomeContact(viewModel) }
-        composable(Routes.ADD) {
-            AddScreen(viewModel)
-        }
+        composable(Routes.ADD) { AddScreen(viewModel , navController) }
         composable(Routes.SEARCH) { SearchScreen() }
         composable(Routes.TRASH) { TrashScreen() }
     }
