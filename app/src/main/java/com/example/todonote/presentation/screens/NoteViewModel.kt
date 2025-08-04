@@ -5,11 +5,12 @@ import androidx.lifecycle.viewModelScope
 import com.example.todonote.data.model.NoteIntent
 import com.example.todonote.data.model.NoteState
 import com.example.todonote.domain.repository.NoteRepository
+import com.example.todonote.presentation.item.NoteItem
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class NoteViewModel(private val repo: NoteRepository): ViewModel() {
+class NoteViewModel(private val repo: NoteRepository) : ViewModel() {
 
 
     private val _state = MutableStateFlow(NoteState())
@@ -24,25 +25,31 @@ class NoteViewModel(private val repo: NoteRepository): ViewModel() {
                     try {
                         val note = repo.getAll()
                         _state.value = NoteState(note)
-                    }
-                    catch (e: Exception){
+                    } catch (e: Exception) {
                         _state.value = NoteState(error = e.message)
 
                     }
                 }
 
                 is NoteIntent.AddNote -> {
-                   repo.insert(intent.note)
+                    repo.insert(intent.note)
                     onIntent(intent = NoteIntent.LoadNotes)
                 }
 
-                is NoteIntent.DeleteNote -> TODO()
+                is NoteIntent.DeleteNote -> {
+                    viewModelScope.launch {
+                        repo.delete(intent.note)
+                        onIntent(NoteIntent.LoadNotes)
+                    }
+                }
+
+                is NoteIntent.UpdateNote -> viewModelScope.launch {
+                    repo.updateNote(intent.note)
+                    onIntent(NoteIntent.LoadNotes) // reload after update
+                }
             }
+
         }
-
     }
-
-
-
 
 }

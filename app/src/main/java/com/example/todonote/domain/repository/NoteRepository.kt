@@ -7,4 +7,5 @@ interface NoteRepository {
     suspend fun getAll(): List<NoteEntity>
     suspend fun insert(note: NoteEntity)
     suspend fun delete(note: NoteEntity)
+    suspend fun updateNote(note: NoteEntity)
 }
