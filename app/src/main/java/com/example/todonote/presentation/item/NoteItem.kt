@@ -29,7 +29,7 @@ import com.example.todonote.data.local.NoteEntity
 
 
 @Composable
-fun NoteItem(notes: NoteEntity, onDelete: (NoteEntity) -> Unit, onEdit: (NoteEntity) -> Unit) {
+fun NoteItem(notes: NoteEntity, onDelete: (NoteEntity) -> Unit, onEdit: (NoteEntity) -> Unit , modifier: Modifier) {
 
 
     val customColors = listOf(
@@ -62,6 +62,7 @@ fun NoteItem(notes: NoteEntity, onDelete: (NoteEntity) -> Unit, onEdit: (NoteEnt
         Row(
             modifier = Modifier
                 .fillMaxWidth()
+
                 .padding(8.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {

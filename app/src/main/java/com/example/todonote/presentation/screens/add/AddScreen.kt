@@ -189,9 +189,10 @@ fun AddScreen(
                         .background(Color.White),
 
                     )
+                val sizeImage = if (imageUri == null) 0.dp else 38.dp
                 Image(
                     modifier = Modifier
-                        .size(38.dp)
+                        .size(sizeImage)
                         .clickable(onClick = {
                             openGallery = true
                             requestPermissions(permissionLauncher)
