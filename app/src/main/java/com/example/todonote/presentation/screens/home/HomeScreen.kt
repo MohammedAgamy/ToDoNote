@@ -46,7 +46,7 @@ fun HomeScreen(viewModel: NoteViewModel , navHostController: NavHostController) 
     ) { innerPadding ->
         Box(modifier = Modifier.padding(innerPadding)) {
             when (selectedTab) {
-                Routes.HOMECONTACT -> HomeContact(viewModel)
+                Routes.HOMECONTACT -> HomeContact(viewModel, navHostController)
                 Routes.ADD -> AddScreen(viewModel , navController = navHostController ) // Replace with actual NavHostController
                 Routes.SEARCH -> SearchScreen()
                 Routes.TRASH -> TrashScreen()

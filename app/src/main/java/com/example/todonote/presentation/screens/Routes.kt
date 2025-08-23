@@ -7,4 +7,5 @@ object Routes {
     const val ADD = "AddNoteScreen"
     const val SEARCH = "SearchScreen"
     const val TRASH = "TrashScreen"
+    const val Edit = "TrashScreen"
 }

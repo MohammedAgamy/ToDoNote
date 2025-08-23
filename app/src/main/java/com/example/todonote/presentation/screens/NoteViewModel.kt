@@ -2,6 +2,7 @@ package com.example.todonote.presentation.screens
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.todonote.data.local.NoteEntity
 import com.example.todonote.data.model.NoteIntent
 import com.example.todonote.data.model.NoteState
 import com.example.todonote.domain.repository.NoteRepository
@@ -17,6 +18,13 @@ class NoteViewModel(private val repo: NoteRepository) : ViewModel() {
     val state: StateFlow<NoteState> = _state
 
 
+
+    init {
+        viewModelScope.launch {
+            repo.getAll()
+            _state.value = _state.value.copy(repo.getAll())
+        }
+    }
     fun onIntent(intent: NoteIntent) {
         viewModelScope.launch {
             when (intent) {
@@ -50,6 +58,9 @@ class NoteViewModel(private val repo: NoteRepository) : ViewModel() {
             }
 
         }
+    }
+    fun getNoteById(id: Int): NoteEntity? {
+        return state.value.notes.find { it.id == id }
     }
 
 }

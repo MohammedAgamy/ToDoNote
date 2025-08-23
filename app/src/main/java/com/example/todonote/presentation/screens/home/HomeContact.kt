@@ -27,14 +27,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.todonote.data.model.NoteIntent
 import com.example.todonote.presentation.item.NoteItem
 import com.example.todonote.presentation.screens.NoteViewModel
+import com.example.todonote.presentation.screens.Routes
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun HomeContact(noteViewModel: NoteViewModel) {
+fun HomeContact(noteViewModel: NoteViewModel , navController: NavHostController) {
     val state by noteViewModel.state.collectAsState()
 
     val snackbarHostState = remember { SnackbarHostState() }
@@ -60,7 +62,10 @@ fun HomeContact(noteViewModel: NoteViewModel) {
             LazyColumn(
                 modifier = Modifier.fillMaxSize()
             ) {
-                items(state.notes) { note ->
+                items(
+                    state.notes,
+                    key = { note -> note.id }
+                ) { note ->
                     var visible by remember { mutableStateOf(true) }
 
                     AnimatedVisibility(
@@ -71,26 +76,21 @@ fun HomeContact(noteViewModel: NoteViewModel) {
                             notes = note,
                             onDelete = {
                                 visible = false
-
-                                LaunchedEffect(note.id) {
-                                    kotlinx.coroutines.delay(300) // نفس مدة الـ exit
-                                    noteViewModel.onIntent(NoteIntent.DeleteNote(note))
-                                }
-                                noteViewModel.onIntent(NoteIntent.DeleteNote(note))
                                 scope.launch {
-                                    snackbarHostState.showSnackbar(" Note deleted successfully")
-
+                                    kotlinx.coroutines.delay(300) // نفس مدة الانيميشن
+                                    noteViewModel.onIntent(NoteIntent.DeleteNote(note))
+                                    snackbarHostState.showSnackbar("Note deleted successfully")
                                 }
-
                             },
                             onEdit = {
-                                //
+
+                                navController.navigate(Routes.Edit + "/${note.id}")
+
                             },
                             modifier = Modifier.animateItemPlacement()
 
                         )
                     }
-
 
 
                 }

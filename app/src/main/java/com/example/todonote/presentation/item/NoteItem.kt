@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.Card
@@ -24,12 +25,18 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import androidx.core.net.toUri
 import coil.compose.rememberAsyncImagePainter
 import com.example.todonote.data.local.NoteEntity
 
 
 @Composable
-fun NoteItem(notes: NoteEntity, onDelete: (NoteEntity) -> Unit, onEdit: (NoteEntity) -> Unit , modifier: Modifier) {
+fun NoteItem(
+    notes: NoteEntity,
+    onDelete: (NoteEntity) -> Unit,
+    onEdit: (NoteEntity) -> Unit,
+    modifier: Modifier
+) {
 
 
     val customColors = listOf(
@@ -62,56 +69,42 @@ fun NoteItem(notes: NoteEntity, onDelete: (NoteEntity) -> Unit, onEdit: (NoteEnt
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-
                 .padding(8.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-
-
-            Column(modifier = Modifier
-                .padding(16.dp)
-                .weight(1f)
-                .clickable {
-                    onEdit(notes)
-                }) {
-                Text(
-                    text = notes.title,
-                    style = MaterialTheme.typography.titleLarge,
-                    color = Color.Black
+            if (notes.image.isNotEmpty()) {
+                Image(
+                    painter = rememberAsyncImagePainter(notes.image.toUri()),
+                    contentDescription = "Note Image",
+                    modifier = Modifier
+                        .width(60.dp)
+                        .height(60.dp)
+                        .clip(RoundedCornerShape(12.dp)),
+                    contentScale = ContentScale.Crop
                 )
+                Spacer(modifier = Modifier.width(12.dp))
+            }
+
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .clickable { onEdit(notes) }
+            ) {
+                Text(notes.title, style = MaterialTheme.typography.titleLarge, color = Color.Black)
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(
-                    text = notes.descr,
+                    notes.descr,
                     style = MaterialTheme.typography.bodyMedium,
                     color = Color.DarkGray
                 )
                 Spacer(modifier = Modifier.height(6.dp))
-                Text(
-                    text = notes.time,
-                    style = MaterialTheme.typography.labelSmall,
-                    color = Color.Gray
-                )
-
-                if (notes.image.isNotEmpty()) {
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Image(
-                        painter = rememberAsyncImagePainter(notes.image),
-                        contentDescription = "Note Image",
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(180.dp)
-                            .clip(RoundedCornerShape(12.dp)),
-                        contentScale = ContentScale.Crop
-                    )
-                }
-
+                Text(notes.time, style = MaterialTheme.typography.labelSmall, color = Color.Gray)
             }
+
             Icon(
                 modifier = Modifier
-                    .padding(8.dp)
-                    .clickable {
-                        onDelete(notes)
-                    },
+                    .clickable { onDelete(notes) }
+                    .padding(8.dp),
                 imageVector = androidx.compose.material.icons.Icons.Default.Delete,
                 contentDescription = "Delete Note",
                 tint = Color.Red
