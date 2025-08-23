@@ -15,7 +15,7 @@ import com.example.todonote.domain.repository.NoteRepositoryImpl
 import com.example.todonote.presentation.screens.NoteViewModel
 import com.example.todonote.presentation.screens.Routes
 import com.example.todonote.presentation.screens.add.AddScreen
-import com.example.todonote.presentation.screens.add.EditScreen
+import com.example.todonote.presentation.edite.EditScreen
 import com.example.todonote.presentation.screens.home.HomeContact
 import com.example.todonote.presentation.screens.home.HomeScreen
 import com.example.todonote.presentation.screens.search.SearchScreen
@@ -40,7 +40,7 @@ fun MyApp() {
         composable(Routes.HOME) { HomeScreen(viewModel , navController) }
         composable(Routes.HOMECONTACT) { HomeContact(viewModel, navController)  }
         composable(Routes.ADD) { AddScreen(viewModel ,navController) }
-        composable(Routes.SEARCH) { SearchScreen() }
+        composable(Routes.SEARCH) { SearchScreen(navController , viewModel) }
         composable(Routes.TRASH) { TrashScreen() }
         composable(Routes.Edit + "/{noteId}") { backStackEntry ->
             val noteId = backStackEntry.arguments?.getString("noteId")?.toIntOrNull()

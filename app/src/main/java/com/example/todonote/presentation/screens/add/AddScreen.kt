@@ -171,7 +171,7 @@ fun AddScreen(
 
             Button(
                 onClick = {
-                    if (title.isEmpty() || descr.isEmpty() ) {
+                    if (title.isEmpty() || descr.isEmpty()) {
                         scope.launch { snackbarHostState.showSnackbar("Please fill in all fields") }
                     } else {
                         val note = NoteEntity(

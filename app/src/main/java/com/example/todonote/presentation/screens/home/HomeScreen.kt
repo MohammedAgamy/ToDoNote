@@ -48,7 +48,7 @@ fun HomeScreen(viewModel: NoteViewModel , navHostController: NavHostController) 
             when (selectedTab) {
                 Routes.HOMECONTACT -> HomeContact(viewModel, navHostController)
                 Routes.ADD -> AddScreen(viewModel , navController = navHostController ) // Replace with actual NavHostController
-                Routes.SEARCH -> SearchScreen()
+                Routes.SEARCH -> SearchScreen(navHostController , viewModel)
                 Routes.TRASH -> TrashScreen()
             }
         }

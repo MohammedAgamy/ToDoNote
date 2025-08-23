@@ -1,8 +1,7 @@
-package com.example.todonote.presentation.screens.add
+package com.example.todonote.presentation.edite
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.compose.foundation.content.MediaType.Companion.Text
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -27,6 +26,7 @@ import com.example.todonote.data.local.NoteEntity
 import com.example.todonote.data.model.NoteIntent
 import com.example.todonote.presentation.screens.NoteViewModel
 import com.example.todonote.presentation.screens.Routes
+import com.example.todonote.presentation.screens.add.getCurrentDateTime
 import kotlinx.coroutines.launch
 
 @RequiresApi(Build.VERSION_CODES.O)
