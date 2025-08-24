@@ -3,7 +3,10 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     id("com.google.devtools.ksp") version "2.0.0-1.0.21" // ✅ النسخة تتماشى مع Kotlin 1.9.24
-   /* id("kotlin-kapt")*/
+    id("com.google.dagger.hilt.android")  version "2.51.1"
+    kotlin("kapt") // ✅ لإضافة دعم KAPT
+
+
 
 }
 
@@ -68,20 +71,25 @@ dependencies {
     val lottieVersion = "6.0.0"
     implementation("com.airbnb.android:lottie-compose:$lottieVersion")
 
-    //Room
-    implementation("androidx.room:room-runtime:2.6.1")
-    implementation("androidx.room:room-ktx:2.6.1")
-    ksp("androidx.room:room-compiler:2.6.1")
 
     implementation("androidx.navigation:navigation-compose:2.7.7")
 
     implementation("io.coil-kt:coil-compose:2.4.0")
 
-    /*
-        //Hilt
-        implementation("com.google.dagger:hilt-android:2.56.2")
-        implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
-        kapt("com.google.dagger:hilt-compiler:2.56.2")*/
+
+    // Room
+    implementation("androidx.room:room-runtime:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
+    ksp("androidx.room:room-compiler:2.6.1")
+
+    // Hilt
+    implementation("com.google.dagger:hilt-android:2.51.1")
+    kapt("com.google.dagger:hilt-compiler:2.51.1")
+
+    // Hilt + Compose Navigation
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+    implementation("com.squareup:javapoet:1.13.0")
+
 
 }
 

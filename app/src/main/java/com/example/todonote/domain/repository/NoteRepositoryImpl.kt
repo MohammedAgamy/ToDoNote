@@ -2,8 +2,9 @@ package com.example.todonote.domain.repository
 
 import com.example.todonote.data.local.NoteDao
 import com.example.todonote.data.local.NoteEntity
+import javax.inject.Inject
 
-class NoteRepositoryImpl(
+class NoteRepositoryImpl @Inject constructor(
     private val dao: NoteDao
 ): NoteRepository {
 

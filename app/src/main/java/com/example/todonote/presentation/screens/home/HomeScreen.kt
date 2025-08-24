@@ -25,7 +25,8 @@ import com.example.todonote.presentation.screens.trash.TrashScreen
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun HomeScreen(viewModel: NoteViewModel , navHostController: NavHostController) {
+fun HomeScreen( navHostController: NavHostController) {
+    val viewModel = androidx.hilt.navigation.compose.hiltViewModel<NoteViewModel>()
     var selectedTab by remember { mutableStateOf(Routes.HOMECONTACT) }
 
     Scaffold(
@@ -46,7 +47,7 @@ fun HomeScreen(viewModel: NoteViewModel , navHostController: NavHostController) 
     ) { innerPadding ->
         Box(modifier = Modifier.padding(innerPadding)) {
             when (selectedTab) {
-                Routes.HOMECONTACT -> HomeContact(viewModel, navHostController)
+                Routes.HOMECONTACT -> HomeContact( navHostController)
                 Routes.ADD -> AddScreen(viewModel , navController = navHostController ) // Replace with actual NavHostController
                 Routes.SEARCH -> SearchScreen(navHostController , viewModel)
                 Routes.TRASH -> TrashScreen()

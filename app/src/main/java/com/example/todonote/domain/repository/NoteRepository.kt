@@ -1,6 +1,7 @@
 package com.example.todonote.domain.repository
 
 import com.example.todonote.data.local.NoteEntity
+import javax.inject.Inject
 
 interface NoteRepository {
 

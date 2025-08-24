@@ -7,11 +7,14 @@ import com.example.todonote.data.model.NoteIntent
 import com.example.todonote.data.model.NoteState
 import com.example.todonote.domain.repository.NoteRepository
 import com.example.todonote.presentation.item.NoteItem
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class NoteViewModel(private val repo: NoteRepository) : ViewModel() {
+@HiltViewModel
+class NoteViewModel @Inject constructor(private val repo: NoteRepository) : ViewModel() {
 
 
     private val _state = MutableStateFlow(NoteState())

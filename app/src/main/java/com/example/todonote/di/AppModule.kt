@@ -1,11 +1,12 @@
 package com.example.todonote.di
-/*
+
 
 import android.content.Context
 import androidx.room.Room
 import com.example.todonote.data.local.NoteDao
 import com.example.todonote.data.local.NoteDatabase
 import com.example.todonote.domain.repository.NoteRepository
+import com.example.todonote.domain.repository.NoteRepositoryImpl
 import com.example.todonote.domain.usecase.AddNoteUseCase
 import com.example.todonote.domain.usecase.GetNotesUseCase
 import com.example.todonote.domain.usecase.UseCases
@@ -41,7 +42,7 @@ object AppModule {
     @Provides
     @Singleton
     fun provideNoteRepository(noteDao: NoteDao): NoteRepository {
-        return NoteRepository(noteDao)
+        return NoteRepositoryImpl(noteDao)
     }
     @Provides
     @Singleton
@@ -52,4 +53,4 @@ object AppModule {
         )
     }
 
-}*/
+}

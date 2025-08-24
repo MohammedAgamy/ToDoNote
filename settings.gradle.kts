@@ -11,6 +11,10 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+//plugins {
+//    id("com.google.dagger.hilt.android") version "2.51.1" apply false
+//    id("com.google.devtools.ksp") version "2.0.0-1.0.21" apply false
+//}
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -21,14 +25,6 @@ dependencyResolutionManagement {
 
 }
 
-buildscript {
-    repositories {
-        google()
-        mavenCentral()
-    }
-    dependencies {
-        classpath("com.google.dagger:hilt-android-gradle-plugin:2.51.1")
-    }
-}
+
 rootProject.name = "ToDoNote"
 include(":app")

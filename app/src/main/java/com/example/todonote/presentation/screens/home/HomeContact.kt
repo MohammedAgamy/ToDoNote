@@ -36,7 +36,10 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun HomeContact(noteViewModel: NoteViewModel , navController: NavHostController) {
+fun HomeContact(navController: NavHostController) {
+
+
+    val noteViewModel: NoteViewModel = androidx.hilt.navigation.compose.hiltViewModel()
     val state by noteViewModel.state.collectAsState()
 
     val snackbarHostState = remember { SnackbarHostState() }
